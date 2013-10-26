@@ -35,5 +35,9 @@ module Fluxcode
         g.javascripts false
         g.helper false
     end
+
+  # Don't log passwords.
+  config.filter_parameters += [:password, :password_confirmation]
+
   end
 end
