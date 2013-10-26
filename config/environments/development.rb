@@ -13,9 +13,14 @@ Fluxcode::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
-
+  # ActionMailer Config
+  # Setup for development - no deliveries, errors raised
+  config.action_mailer.default_url_options = { :host => 'fluxco-de.dev' } 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = false
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default :charset => "utf-8"
+  
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -26,4 +31,7 @@ Fluxcode::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  # Livereload
+  config.middleware.insert_after(ActionDispatch::Static, Rack::LiveReload)
 end
