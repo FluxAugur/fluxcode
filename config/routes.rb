@@ -1,6 +1,17 @@
 Fluxcode::Application.routes.draw do
-  devise_for :users
+  namespace :user do
+    root :to => 'home#index'
+  end
+
+  devise_for :users, :controllers => {
+    registrations: "users/registrations",
+    passwords: "users/passwords",
+    omniauth_callbacks: "users/omniauth_callbacks"
+  }
+
+  resources :users
   root :to => 'visitors#index'
+  get "visitors/index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
